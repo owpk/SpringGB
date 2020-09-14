@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Cost</td>
+            <td>Category</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="repr : ${cart}">
+            <td th:text="${repr.id}"/>
+            <td th:text="${repr.name}"/>
+            <td th:text="${repr.cost}"/>
+            <td th:text="${repr.category}"/>
+            <td>
+                <a class="btn btn-danger" th:href="@{'/delete/' + ${repr.id}}">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>Add product</h2>
+
+    <form id="add_prod" method="GET" th:action="@{'/add'}">
+        <div>
+            <input type="text" name="name" placeholder="Name">
+            <input type="number" name="cost" placeholder="Price">
+            <div class="form-group column" style="max-width: fit-content">
+                <p>
+                    <select class="form-control" id="categories" name="category">
+                        <option th:each="cat : ${categories}"
+                                th:value="${cat.name}"
+                                th:text="${cat.name}"/>
+                    </select>
+                </p>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-primary" type="submit">Add</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
