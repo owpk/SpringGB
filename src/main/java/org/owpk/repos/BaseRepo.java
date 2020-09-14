@@ -33,7 +33,7 @@ public class BaseRepo<T extends EntityModel> implements Repository<T> {
 
   @Override
   public void updateItem(T item) {
-    int ind  = search(Objects::isNull);
+    int ind  = search(Objects::nonNull);
     if (ind != -1)
       items.set(ind, item);
   }
