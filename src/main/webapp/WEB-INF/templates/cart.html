@@ -25,6 +25,7 @@
             <td th:text="${repr.name}"/>
             <td th:text="${repr.cost}"/>
             <td th:text="${repr.category}"/>
+
             <td>
                 <a class="btn btn-danger" th:href="@{'/delete/' + ${repr.id}}">Удалить</a>
             </td>
@@ -39,6 +40,7 @@
             <input type="number" name="cost" placeholder="Price">
             <div class="form-group column" style="max-width: fit-content">
                 <p>
+                    <label>Choose a category:</label>
                     <select class="form-control" id="categories" name="category">
                         <option th:each="cat : ${categories}"
                                 th:value="${cat.name}"
