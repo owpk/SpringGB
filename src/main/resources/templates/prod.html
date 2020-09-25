@@ -11,6 +11,25 @@
 <p th:text="#{home.welcome}">Welcome!</p>
 
 <div class="container">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${products.isFirst() ? 'disabled' : ''}">
+                <a class="page-link"
+                   th:href="@{'/prod?p=' + ${products.previousOrFirstPageable().getPageNumber() + 1} + ${filtered_attributes}}">Назад</a>
+            </li>
+
+            <li class="page-item" th:classappend="${products.getNumber() + 1 == i ? 'active' : ''}"
+                th:each="i : ${pages}">
+                <a class="page-link" th:text="${i}" th:href="@{'/prod?p=' + ${i} + ${filtered_attributes}}"></a>
+            </li>
+
+            <li class="page-item"  th:classappend="${products.isLast() ? 'disabled' : ''}">
+                <a class="page-link"
+                   th:href="@{'/prod?p='+ ${products.nextOrLastPageable().getPageNumber() + 1} + ${filtered_attributes}}">Вперед</a>
+            </li>
+        </ul>
+    </nav>
+
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -23,8 +42,10 @@
             <td th:text="${p.id}"/>
             <td th:text="${p.title}"/>
             <td th:text="${p.price}"/>
+            <td><a class="btn btn-danger" th:href="@{'/prod/delete/' + ${p.id}}" th:text="Delete"/></td>
         </tr>
     </table>
 </div>
+
 </body>
 </html>

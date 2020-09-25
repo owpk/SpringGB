@@ -17,4 +17,8 @@ public class ProductService {
   public Page<Product> getAll(Pageable var, Specification<Product> specification) {
     return productRepo.findAll(specification, var);
   }
+
+  public void deleteById(Long id) {
+    productRepo.deleteById(id);
+  }
 }
