@@ -63,11 +63,12 @@ public class Main {
         if (j == 0)
           offset += PAGINATION_SIZE;
       }
-      if (current >= diapasons[i][0] && current <= diapasons[i][1]) {
+      if (current >= diapasons[i][0] && current < diapasons[i][1]) {
         pages = IntStream.range(diapasons[i][0] + 1,
             diapasons[i][0] + PAGINATION_SIZE > total ? total + 1 : diapasons[i][1] + 1)
             .boxed()
             .collect(Collectors.toList());
+        break;
       }
     }
     return pages;
