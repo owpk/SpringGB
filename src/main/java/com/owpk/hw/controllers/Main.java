@@ -3,7 +3,7 @@ package com.owpk.hw.controllers;
 import com.owpk.hw.entities.Product;
 import com.owpk.hw.services.ProductService;
 import com.owpk.hw.utils.ProdFilter;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -20,14 +19,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-@AllArgsConstructor
 public class Main {
-  private static final int PAGINATION_SIZE = 5;
+  private static final int PAGINATION_SIZE = 3;
+
   private ProductService productService;
 
   @GetMapping("/prod")
   private String get(@RequestParam(name = "p") Optional<Integer> page,
-                     @RequestParam Map<String, String> params, Model model) {
+                     @RequestParam Map<String, String> params,
+                     Model model) {
     ProdFilter filter = new ProdFilter(params);
     filter.buildSpec();
     int currentPage = page.orElse(1);
@@ -37,18 +37,23 @@ public class Main {
 
     model.addAttribute("products", products);
 
-    model.addAttribute("filtered_attributes",
-        filter.getFilteredAttributes());
+    model.addAttribute("filtered_attributes", filter.getFilteredAttributes());
 
-    model.addAttribute("pages", getPages(products.getNumber(), products.getTotalPages()));
+    model.addAttribute("pages",
+        getPages(products.getNumber(), products.getTotalPages()));
     return "prod";
+  }
+
+  @Autowired
+  public void setProductService(ProductService productService) {
+    this.productService = productService;
   }
 
   // разделяет весь Page<T> на интервалы по PAGINATION_SIZE, находит необходимый интервал страниц
   // в котором находится текущая страница, заполняет и отдает список List<Integer> pages, тоесть необходимый интервал,
   // который передается в модель.
   private List<Integer> getPages(int current, int total) {
-    int diapasons[][] = new int[(int) Math.ceil(total / (float) PAGINATION_SIZE)][];
+    int[][] diapasons = new int[(int) Math.ceil(total / (float) PAGINATION_SIZE)][];
     int offset = 0;
     List<Integer> pages = null;
     for (int i = 0; i < diapasons.length; i++) {
@@ -69,8 +74,13 @@ public class Main {
   }
 
   @GetMapping("/prod/delete/{id}")
-  private String delete(@PathVariable Long id) {
+  private String delete(@PathVariable Long id,
+                        @RequestParam Map<String, String> params) {
     productService.deleteById(id);
-    return "redirect:/prod";
+    params.forEach((k,v) -> System.out.println(k + " : " + v));
+    return "redirect:/prod" +
+        (params.size() > 0 ? params.keySet().stream()
+        .map(k -> k + "=" + params.get(k)).reduce("?", (p1,p2) -> p1 + "&" + p2)
+        : "");
   }
 }

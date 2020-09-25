@@ -9,8 +9,26 @@
 
 <body>
 <p th:text="#{home.welcome}">Welcome!</p>
-
 <div class="container">
+
+    <form method="GET" th:action="@{/prod} ">
+        <div class="col">
+            <div class="row-3">
+                <input placeholder="Select min price" type="text" th:name="min_price"/>
+            </div>
+            <div class="row-3">
+                <input placeholder="Select max price" type="text" th:name="max_price"/>
+            </div>
+            <div class="row-3">
+                <input placeholder="Select name" type="text" th:name="title"/>
+            </div>
+
+            <div class="row-3">
+                <button class="btn btn-primary" type="submit">Ok</button>
+            </div>
+        </div>
+    </form>
+
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item" th:classappend="${products.isFirst() ? 'disabled' : ''}">
@@ -23,7 +41,7 @@
                 <a class="page-link" th:text="${i}" th:href="@{'/prod?p=' + ${i} + ${filtered_attributes}}"></a>
             </li>
 
-            <li class="page-item"  th:classappend="${products.isLast() ? 'disabled' : ''}">
+            <li class="page-item" th:classappend="${products.isLast() ? 'disabled' : ''}">
                 <a class="page-link"
                    th:href="@{'/prod?p='+ ${products.nextOrLastPageable().getPageNumber() + 1} + ${filtered_attributes}}">Вперед</a>
             </li>
@@ -42,7 +60,11 @@
             <td th:text="${p.id}"/>
             <td th:text="${p.title}"/>
             <td th:text="${p.price}"/>
-            <td><a class="btn btn-danger" th:href="@{'/prod/delete/' + ${p.id}}" th:text="Delete"/></td>
+            <td>
+                <a class="btn btn-danger"
+                   th:href="@{'/prod/delete/' + ${p.id} + '?p=' +${products.getNumber() + 1} + ${filtered_attributes}}"
+                   th:text="Delete"/>
+            </td>
         </tr>
     </table>
 </div>
