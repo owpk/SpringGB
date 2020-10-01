@@ -20,6 +20,7 @@ public class ProdFilter {
 
   public void buildSpec() {
     final StringBuilder sb = new StringBuilder();
+    spec = Specification.where(null);
     if(params.containsKey("max_price") && !params.get("max_price").trim().isEmpty()) {
       Integer maxPrice = Integer.valueOf(params.get("max_price"));
       spec = spec.and(ProdSpec.priceLessOrEqual(maxPrice));
