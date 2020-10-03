@@ -25,4 +25,10 @@ public class Order {
   @ManyToOne
   @JoinColumn(name = "customer_id")
   private Customer customer;
+
+  public Order(Integer price, List<OrderItem> items, Customer customer) {
+    this.price = price;
+    this.items = items;
+    this.customer = customer;
+  }
 }

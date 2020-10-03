@@ -9,6 +9,8 @@
 <body>
 <div class="container">
     <div th:replace="~{nav :: nav(Orders)}" />
+    <a class="btn btn-success" th:href="@{/orders/create}">Place an order</a>
+
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -19,11 +21,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="o : ${orders}">
-            <td th:text="${o.id}"/>
-            <td th:text="${o.customer.name}"/>
+        <tr th:each="o : ${order}">
+            <td th:text="${o.product.id}"/>
             <td th:text="${o.product.title}"/>
-            <td th:text="${o.price}"/>
+            <td th:text="${o.product.price}"/>
         </tr>
         </tbody>
     </table>
