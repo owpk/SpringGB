@@ -8,24 +8,31 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{nav :: nav(Orders)}" />
-    <a class="btn btn-success" th:href="@{/orders/create}">Place an order</a>
+    <div th:replace="~{nav :: nav(Orders)}"/>
+    <a class="btn btn-success" th:href="@{/orders/place}">Place an order</a>
 
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Клиент</th>
-            <th>Товар</th>
             <th>Цена</th>
+            <th>Товар</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="o : ${order}">
-            <td th:text="${o.product.id}"/>
-            <td th:text="${o.product.title}"/>
-            <td th:text="${o.product.price}"/>
-        </tr>
+        <span th:each="o : ${order.orderList}">
+            <td th:text="${o.id}"/>
+            <td th:text="${o.customer.name}"/>
+            <td th:text="${o.price}"/>
+            <td>
+                <tr th:each="p: ${o.items}">
+                <p th:text="${p.id}"></p>
+                <p th:text="${p.product.title}"></p>
+                <p th:text="${p.product.price}"></p>
+                </tr>
+            <td>
+        </span>
         </tbody>
     </table>
 </div>

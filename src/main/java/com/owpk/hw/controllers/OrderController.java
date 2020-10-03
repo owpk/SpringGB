@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -24,20 +25,20 @@ public class OrderController {
   private UserSession userSession;
 
   @GetMapping
-  private String getOrders(Model model) {
+  @ResponseBody
+  private String getOrders() {
     List<Order> orders = orderService.findAll();
-    model.addAttribute("orders", orders);
-    return "order";
+    return "Order created: " + orders;
   }
 
-  @GetMapping("/place")
+  @GetMapping("/show")
   private String placeOrder(Model model) {
     userSession.addOrder(new Order(cart.getPrice(), cart.getContainer(), userSession.getCustomer()));
     model.addAttribute("order", userSession);
     return "order";
   }
 
-  @GetMapping("/create")
+  @GetMapping("/place")
   private String createOrder() {
     for (Order o: userSession.getOrderList()) {
       orderService.createOrder(o);
