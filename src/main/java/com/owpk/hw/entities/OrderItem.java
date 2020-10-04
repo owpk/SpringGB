@@ -36,6 +36,15 @@ public class OrderItem {
     this.pricePerProduct = p.getPrice();
   }
 
+  @Override
+  public String toString() {
+    return "OrderItem{" +
+        "quantity=" + quantity +
+        ", price=" + price +
+        ", product=" + product +
+        '}';
+  }
+
   public void incrementQuantity() {
     quantity++;
     price = pricePerProduct * quantity;

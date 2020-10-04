@@ -11,6 +11,12 @@
     <div th:replace="nav :: nav(Cart)"/>
 
     <span  th:if="${@cart.container.isEmpty()}">Cart is empty</span>
+
+    <div>
+        <a class="btn btn-success" th:href="@{/orders/show}">Show order list</a>
+
+    </div>
+
     <table th:if="${!@cart.container.isEmpty()}" class="table table-hover">
         <thead class="thead-dark">
         <tr>

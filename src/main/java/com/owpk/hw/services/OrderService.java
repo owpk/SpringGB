@@ -2,6 +2,7 @@ package com.owpk.hw.services;
 
 import com.owpk.hw.entities.Order;
 import com.owpk.hw.repositories.OrderRepo;
+import com.owpk.hw.utils.Cart;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +21,7 @@ public class OrderService {
     return orderRepo.findAll();
   }
 
+  public void createOrder(Order order) {
+    orderRepo.save(order);
+  }
 }
