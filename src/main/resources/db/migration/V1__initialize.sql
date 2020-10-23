@@ -30,11 +30,19 @@ values
 
 insert into users_roles (user_id, role_id) values (1, 1), (1, 2);
 
+create table categories (
+    id                      bigserial primary key,
+    title                   varchar(255) not null
+);
+
 create table products (
     id                      bigserial primary key,
     title                   varchar(255),
-    price                   int
+    price                   int,
+    category_id             bigint references categories(id)
 );
+
+
 
 create table orders (
     id                      bigserial primary key,
@@ -52,30 +60,35 @@ create table order_items (
     quantity                int
 );
 
-insert into products (title, price)
+insert into categories (title)
 values
-('Bread1', 1),
-('Bread2', 2),
-('Bread3', 3),
-('Bread4', 32),
-('Bread5', 42),
-('Bread6', 52),
-('Bread7', 32),
-('Bread8', 42),
-('Bread9', 552),
-('Bread10', 32),
-('Bread11', 122),
-('Bread12', 312),
-('Bread13', 22),
-('Bread14', 432),
-('Bread15', 532),
-('Bread16', 542),
-('Bread17', 232),
-('Bread18', 22),
-('Bread19', 22),
-('Bread20', 22),
-('Bread21', 22),
-('Bread22', 22),
-('Bread23', 22),
-('Bread24', 22),
-('Bread25', 22);
+('Food'),
+('Clothes');
+
+insert into products (title, price, category_id)
+values
+('Bread1', 1, 1),
+('Bread2', 2, 1),
+('Bread3', 3, 1),
+('Bread4', 32, 1),
+('Bread5', 42, 1),
+('Bread6', 52, 1),
+('Bread7', 32, 1),
+('Bread8', 42, 1),
+('Bread9', 552, 1),
+('Bread10', 32, 1),
+('Shirt1', 122, 2),
+('Shirt12', 312, 2),
+('Shirt13', 22, 2),
+('Shirt14', 432, 2),
+('Shirt15', 532, 2),
+('Shirt16', 542, 2),
+('Shirt17', 232, 2),
+('Shirt18', 22, 2),
+('Shirt19', 22, 2),
+('Shirt20', 22, 2),
+('Shirt21', 22, 2),
+('Shirt22', 22, 2),
+('Shirt23', 22, 2),
+('Shirt24', 22, 2),
+('Shirt25', 22, 2);
