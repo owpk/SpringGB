@@ -2,6 +2,7 @@ package com.owpk.hw.controllers;
 
 import com.owpk.hw.dto.ProductDto;
 import com.owpk.hw.entities.Product;
+import com.owpk.hw.repositories.specifications.ProdSpec;
 import com.owpk.hw.services.ProductService;
 import com.owpk.hw.utils.Cart;
 import com.owpk.hw.utils.ProductFilter;
@@ -34,9 +35,19 @@ public class ProductController {
         Specification<Product> specification = productSpec.getSpec();
         Pageable var = PageRequest.of(page - 1, 5);
         Page<Product> products =  productService.getProductBySpec(specification, var);
-        return products.get().map(ProductDto::new).collect(Collectors.toList());
+        return products
+                .get()
+                .map(ProductDto::new)
+                .collect(Collectors.toList());
     }
 
-
+    //Filter by categories only test
+    @GetMapping("/all")
+    private List<ProductDto> getAllBySpecificCategory(@RequestParam(name = "category") String category) {
+        return productService.getAllBySpec(ProdSpec.categoryLike(category))
+                .stream()
+                .map(ProductDto::new)
+                .collect(Collectors.toList());
+    }
 
 }

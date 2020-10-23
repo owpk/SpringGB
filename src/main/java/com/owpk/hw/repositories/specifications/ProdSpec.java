@@ -13,4 +13,7 @@ public class ProdSpec {
     public static Specification<Product> titleLike(String title) {
         return (Specification<Product>) (root, query, builder) -> builder.like(root.get("title"), title);
     }
+    public static Specification<Product> categoryLike(String categoryName) {
+        return (Specification<Product>) (root, query, builder) -> builder.like(root.get("category").get("title"), categoryName);
+    }
 }

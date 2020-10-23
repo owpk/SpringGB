@@ -18,6 +18,6 @@ public class Category {
     private long id;
     private String title;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "category")
     private List<Product> productsCategories;
 }

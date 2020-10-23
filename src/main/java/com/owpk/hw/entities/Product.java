@@ -19,7 +19,7 @@ public class Product {
     private String title;
     private Integer price;
 
-    @OneToMany(mappedBy = "productsCategories")
+    @ManyToOne
     private Category category;
 
 }
