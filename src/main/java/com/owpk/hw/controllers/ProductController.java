@@ -23,10 +23,13 @@ public class ProductController {
     private Cart cart;
 
     @GetMapping
-    private Page<Product> getProducts(@RequestParam(name = "p") Integer page,
-                               @RequestParam Map<String, String> params) {
+    private Page<Product> getAllProducts(@RequestParam(name = "p", defaultValue = "1", required = false) Integer page,
+                                         @RequestParam Map<String, String> params) {
+        if (page == null || page < 1) page = 1;
         ProductFilter productSpec = new ProductFilter(params);
         Specification<Product> specification = productSpec.getSpec();
         return productService.getProductBySpec(specification, PageRequest.of(page - 1, 5));
     }
+
+
 }

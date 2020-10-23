@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class ProductService {
@@ -16,5 +18,9 @@ public class ProductService {
 
     public Page<Product> getProductBySpec(Specification<Product> specification, Pageable var) {
         return productRepo.findAll(specification, var);
+    }
+
+    public Optional<Product> findById(Long id) {
+        return productRepo.findById(id);
     }
 }
