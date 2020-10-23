@@ -36,6 +36,14 @@ create table products (
     price                   int
 );
 
+create table categories (
+    id                      bigserial primary key,
+    product_id              bigint references products(id),
+    title                   varchar(255),
+);
+
+
+
 create table orders (
     id                      bigserial primary key,
     user_id                 bigint references users(id),
