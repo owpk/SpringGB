@@ -2,6 +2,7 @@ package com.owpk.hw.services;
 
 import com.owpk.hw.entities.Role;
 import com.owpk.hw.entities.User;
+import com.owpk.hw.repositories.RoleRepo;
 import com.owpk.hw.repositories.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +19,10 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
+
     private UserRepo userRepo;
+    private RoleRepo roleRepo;
+
     public User findByUsername(String username) {
         return userRepo.findByUsername(username);
     }
@@ -27,13 +31,16 @@ public class UserService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
-        if (user == null) {
+        if (user == null)
             throw new UsernameNotFoundException(String.format("User '%s' not found", username));
-        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+    }
+    private Collection<? extends GrantedAuthority>
+    mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream().map(role -> new
+                SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-    }
 }

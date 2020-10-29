@@ -22,11 +22,11 @@ CREATE TABLE users_roles (
 
 insert into roles (name)
 values
-('ROLE_USER'), ('ROLE_ADMIN'), ('SOMETHING');
+('ROLE_USER'), ('ROLE_ADMIN'), ('SOMETHING'), ('ROLE_ANONYMOUS');
 
 insert into users (username, password, email)
 values
-('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com');
+('user', '$2y$11$H7RMGWLES6N5MJJYChfu2uXt.agiR5klltgqxw8jvpY6PY/CGTX8e', 'user@gmail.com');
 
 insert into users_roles (user_id, role_id) values (1, 1), (1, 2);
 
