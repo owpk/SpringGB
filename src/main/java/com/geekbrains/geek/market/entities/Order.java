@@ -1,6 +1,7 @@
 package com.geekbrains.geek.market.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.geekbrains.geek.market.dto.OrderDto;
 import com.geekbrains.geek.market.utils.Cart;
 import lombok.Data;
 import lombok.NoArgsConstructor;

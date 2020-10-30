@@ -1,21 +1,18 @@
 package com.geekbrains.geek.market.controllers;
 
+import com.geekbrains.geek.market.dto.CartDto;
 import com.geekbrains.geek.market.dto.OrderDto;
+import com.geekbrains.geek.market.dto.UserDto;
 import com.geekbrains.geek.market.entities.Order;
-import com.geekbrains.geek.market.entities.Product;
 import com.geekbrains.geek.market.entities.User;
 import com.geekbrains.geek.market.services.OrderService;
 import com.geekbrains.geek.market.services.UserService;
 import com.geekbrains.geek.market.utils.Cart;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.net.http.HttpRequest;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,15 +45,20 @@ public class OrderController {
 
     @GetMapping("/create")
     public String showOrderPage(Principal principal) {
-//        model.addAttribute("username", principal.getName());
+
         return principal.getName();
     }
 
     @PostMapping(consumes = "application/json")
     @RequestMapping("/confirm")
-    public void createProduct(@RequestBody OrderDto o) {
-        System.out.println(o);
-//        return productService.saveOrUpdate(p);
+    public void createProduct(@RequestBody OrderDto[] o) {
+        System.out.println("------------------");
+        if (o != null && o.length > 0) {
+            System.out.println(o[0].getUsername());
+            User u = userService.findByUsername(o[0].getUsername());
+            Arrays.stream(o).map(x -> new Order(u, cart, x.getAddress())).forEach(orderService::save);
+        }
+        System.out.println(orderService.findAll());
     }
 
 //    @PostMapping

@@ -42,5 +42,9 @@ angular.module('app').controller('cartController', function ($scope, $http) {
             });
     };
 
+    $scope.createOrder = function () {
+
+    }
+
     $scope.cartContentRequest();
 });

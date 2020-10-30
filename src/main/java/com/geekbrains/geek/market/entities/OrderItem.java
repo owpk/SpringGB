@@ -1,13 +1,17 @@
 package com.geekbrains.geek.market.entities;
 
+import com.geekbrains.geek.market.dto.OrderItemDto;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "order_items")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class OrderItem {
     @Id
@@ -37,6 +41,10 @@ public class OrderItem {
         this.quantity = 1;
         this.price = p.getPrice();
         this.pricePerProduct = p.getPrice();
+    }
+
+    public OrderItem(OrderItemDto dto, Product product) {
+
     }
 
     public void incrementQuantity() {

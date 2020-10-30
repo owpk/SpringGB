@@ -1,12 +1,15 @@
 package com.geekbrains.geek.market.entities;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "users")
 public class User {
     @Id

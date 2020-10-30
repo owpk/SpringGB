@@ -16,7 +16,6 @@ angular.module('app').controller('orderController', function ($scope, $http, $lo
         console.log($scope.order)
         $http.post(contextPath + '/api/v1/order/confirm', $scope.order)
             .then(function (response) {
-                console.log($scope.order)
                 alert('Добавлен заказ');
            });
     };2
