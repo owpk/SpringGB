@@ -15,6 +15,7 @@ angular.module('app').controller('authController', function ($scope, $http, $loc
                 }
             }, function errorCallback(response) {
                 window.alert(response.data.message);
+                console.log("ERROR")
                 $scope.clearUser();
             });
     };

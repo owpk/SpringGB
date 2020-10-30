@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class OrderDto {
 
-    @JsonFormat(pattern = "dd-MM-yy HH:mm", locale = "US")
+    @JsonFormat(pattern = "dd-MM-yy HH:mm")
     private Date timestamp;
     private Long id;
     private String username;

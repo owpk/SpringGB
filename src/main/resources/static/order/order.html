@@ -1,0 +1,23 @@
+<div>
+    <h3>Заказ</h3>
+
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+        </tr>
+        <tbody>
+
+        <tr ng-repeat="o in order">
+            <td>{{o.timestamp}}</td>
+            <td>{{o.username}}</td>
+            <td>{{o.orderItemDtoList}}</td>
+            <td>{{o.address}}</td>
+            <td>{{o.price}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

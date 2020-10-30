@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/orders")
+@RequestMapping("/api/v1/order")
 @AllArgsConstructor
 public class OrderController {
 
@@ -29,10 +29,11 @@ public class OrderController {
     }
 
     @GetMapping("/test")
-    public List<OrderDto> showOrders() {
+    public List<OrderDto> createFakeOder() {
+        System.out.println("---TEST REQUEST---");
         cart.addOrIncrement(1L);
         cart.addOrIncrement(2L);
-        Order order = new Order(userService.findUserById(1L), cart, "NYC Foobar St.");
+        Order order = new Order(userService.findUserById(1L), cart, "NYC Abc St.");
         orderService.save(order);
         return orderService.findAll()
                 .stream()

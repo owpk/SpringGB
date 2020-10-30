@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 
 @Component
-@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Getter
 @Setter
 public class Cart {
