@@ -2,14 +2,19 @@ package com.geekbrains.geek.market.controllers;
 
 import com.geekbrains.geek.market.dto.OrderDto;
 import com.geekbrains.geek.market.entities.Order;
+import com.geekbrains.geek.market.entities.Product;
+import com.geekbrains.geek.market.entities.User;
 import com.geekbrains.geek.market.services.OrderService;
 import com.geekbrains.geek.market.services.UserService;
 import com.geekbrains.geek.market.utils.Cart;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.http.HttpRequest;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,14 +52,17 @@ public class OrderController {
         return principal.getName();
     }
 
-//    @PostMapping("/confirm")
-//    public String confirmOrder(Principal principal,
-//                               @RequestParam(name = "address") String address,
-//                               @RequestParam(name = "receiver_name") String receiverName,
-//                               @RequestParam(name = "phone_number") String phone
-//    ) {
-//        User user = userService.findByUsername(principal.getName());
-//        Order order = new Order(user, cart, address);
+    @PostMapping(consumes = "application/json")
+    @RequestMapping("/confirm")
+    public void createProduct(@RequestBody OrderDto o) {
+        System.out.println(o);
+//        return productService.saveOrUpdate(p);
+    }
+
+//    @PostMapping
+//    public String confirmOrder() {
+//        User user = userService.findByUsername();
+//        Order order = new Order(user, cart, );
 //        order = orderService.save(order);
 //        return "Ваш заказ #" + order.getId();
 //    }

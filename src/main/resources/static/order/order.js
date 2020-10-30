@@ -1,4 +1,4 @@
-angular.module('app').controller('orderController', function ($scope, $http) {
+angular.module('app').controller('orderController', function ($scope, $http, $localStorage) {
     const contextPath = 'http://localhost:8189/market';
 
     $scope.orderContentRequest = function () {
@@ -11,6 +11,16 @@ angular.module('app').controller('orderController', function ($scope, $http) {
                 $scope.order = response.data;
             });
     };
+
+    $scope.confirmOrder = function () {
+        console.log($scope.order)
+        $http.post(contextPath + '/api/v1/order/confirm', $scope.order)
+            .then(function (response) {
+                console.log($scope.order)
+                alert('Добавлен заказ');
+           });
+    };2
+
 
     $scope.orderContentRequest();
 });
