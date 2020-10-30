@@ -69,3 +69,4 @@ values
 ('Bread', 1, 1),
 ('Samsung V100', 2, 3),
 ('Acer X1000', 3, 2);
+

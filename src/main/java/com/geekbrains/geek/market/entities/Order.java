@@ -40,7 +40,7 @@ public class Order {
         this.price = cart.getPrice();
         this.items = new ArrayList<>();
         this.address = address;
-        cart.getItems().stream().forEach(oi -> {
+        cart.getItems().forEach(oi -> {
             oi.setOrder(this);
             items.add(oi);
         });

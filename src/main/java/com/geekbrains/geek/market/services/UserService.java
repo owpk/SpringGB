@@ -3,6 +3,7 @@ package com.geekbrains.geek.market.services;
 
 import com.geekbrains.geek.market.entities.Role;
 import com.geekbrains.geek.market.entities.User;
+import com.geekbrains.geek.market.exceptions.ResourceNotFoundException;
 import com.geekbrains.geek.market.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class UserService implements UserDetailsService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     @Override

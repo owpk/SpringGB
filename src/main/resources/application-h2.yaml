@@ -1,3 +1,7 @@
+server:
+  port: 8189
+  servlet:
+    context-path: /hw
 spring:
   datasource:
     driver-class-name: org.h2.Driver
@@ -16,3 +20,5 @@ spring:
         web-allow-others: false
 jwt:
   secret: tg5g98h45g98h45g9845hg98hf9834hf9834hjheriheriuher9g8h384y5934yhhtertg
+
+apiEndpoint: /api/v1

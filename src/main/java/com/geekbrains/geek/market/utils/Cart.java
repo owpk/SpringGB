@@ -4,9 +4,7 @@ import com.geekbrains.geek.market.entities.OrderItem;
 import com.geekbrains.geek.market.entities.Product;
 import com.geekbrains.geek.market.exceptions.ResourceNotFoundException;
 import com.geekbrains.geek.market.services.ProductService;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -20,11 +18,17 @@ import java.util.List;
 
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
-@Data
+@Getter
+@Setter
 public class Cart {
-    private final ProductService productService;
+    private ProductService productService;
     private List<OrderItem> items;
     private int price;
+
+    @Autowired
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
+    }
 
     @PostConstruct
     public void init() {
