@@ -2,7 +2,7 @@ angular.module('app').controller('authController', function ($scope, $http, $loc
     const contextPath = 'http://localhost:8189/market';
 
     $scope.tryToAuth = function () {
-        $http.post(contextPath + '/auth', $scope.user)
+        $http.post(contextPath + '/user/auth', $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
