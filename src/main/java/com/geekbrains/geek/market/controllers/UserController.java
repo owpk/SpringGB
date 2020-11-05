@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -40,8 +40,10 @@ public class UserController {
 
     //Edit profile
     @GetMapping("/edit")
-    public ResponseEntity<?> editAccResponse(@RequestBody Principal principal) {
+    public ResponseEntity<?> editAccResponse(Principal principal) {
         User u = userService.findByUsername(principal.getName()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        System.out.println(u.getUsername());
+        System.out.println(principal.getName());
         return ResponseEntity.ok(u);
     }
 
