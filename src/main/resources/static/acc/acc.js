@@ -4,16 +4,14 @@ angular.module('app').controller('accController', function ($scope, $http, $loca
     $scope.editConfirm = function () {
         $http.post(contextPath + '/api/v1/user/edit', $scope.user)
             .then(function successCallback(response) {
-                if (response.data.token) {
-                    console.log($localStorage.currentUser);
-                }
+                 log(response.data);
             }, function errorCallback(response) {
                 window.alert(response.data.message);
                 $scope.clearUser();
             });
     };
 
-    $scope.getCurrentUser = function (productId) {
+    $scope.getCurrentUser = function () {
         $http({
             url: contextPath + '/api/v1/user/edit',
             method: 'GET'
