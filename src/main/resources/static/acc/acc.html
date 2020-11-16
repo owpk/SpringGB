@@ -1,4 +1,24 @@
 <div class="mb-3 text-center">
-        <h1 ng-text="currentUser.username" id="userName"/>
-        <h1 ng-model="currentUser.email" id="userEmail"/>
+        <h3>Profile</h3>
+        <form novalidate ng-submit="submitUpdateProfile()">
+                <input class="form-control" type="number" hidden ng-model="profile.id">
+                <div class="form-group col-md-6">
+                        <label for="elementTitle">User name</label>
+                        <input class="form-control" type="text" ng-model="profile.username" id="elementTitle">
+                </div>
+
+                <div class="form-group col-md-6">
+                        <label for="elementHobby">Hobby</label>
+                        <input class="form-control" type="text" ng-model="profile.hobby" id="elementHobby">
+                </div>
+
+                <div class="form-group col-md-6">
+                        <label for="elementPassword">Password</label>
+                        <input class="form-control" type="password" ng-model="profile.confirmationPassword" id="elementPassword">
+                </div>
+
+                <dib>
+                        <button class="btn btn-success" type="submit">Save</button>
+                </dib>
+        </form>
 </div>

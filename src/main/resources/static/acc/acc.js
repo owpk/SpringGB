@@ -1,25 +1,21 @@
 angular.module('app').controller('accController', function ($scope, $http, $localStorage) {
     const contextPath = 'http://localhost:8189/market';
 
-    $scope.editConfirm = function () {
-        $http.post(contextPath + '/api/v1/user/edit', $scope.user)
-            .then(function successCallback(response) {
-                 log(response.data);
-            }, function errorCallback(response) {
-                window.alert(response.data.message);
-                $scope.clearUser();
-            });
-    };
-
-    $scope.getCurrentUser = function () {
-        $http({
-            url: contextPath + '/api/v1/user/edit',
-            method: 'GET'
-        })
+    $scope.submitUpdateProfile = function() {
+        $http.put(contextPath + '/api/v1/profiles', $scope.profile)
             .then(function (response) {
-                $scope.currentUser = response.data;
+                $scope.loadProfile();
+                alert('Profile updated!')
             });
     };
 
-    $scope.getCurrentUser();
+    $scope.loadProfile = function() {
+        $http.get(contextPath + '/api/v1/profiles')
+            .then(function(response) {
+                $scope.profile = response.data;
+                console.log($scope.profile);
+            });
+    };
+
+    $scope.loadProfile();
 });

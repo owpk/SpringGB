@@ -26,6 +26,10 @@
             .when('/cart', {
                 templateUrl: 'cart/cart.html',
                 controller: 'cartController'
+            })
+            .when('/acc', {
+                  templateUrl: 'acc/acc.html',
+                  controller: 'accController'
             });
 
         $httpProvider.interceptors.push(function ($q, $location) {

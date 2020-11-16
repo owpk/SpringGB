@@ -20,6 +20,12 @@ CREATE TABLE users_roles (
   foreign key (role_id) references roles (id)
 );
 
+create table profiles (
+    id          bigserial,
+    user_id     bigint references users (id),
+    hobby       varchar(255)
+);
+
 insert into roles (name)
 values
 ('ROLE_USER'), ('ROLE_ADMIN'), ('SOMETHING');
@@ -29,6 +35,10 @@ values
 ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com');
 
 insert into users_roles (user_id, role_id) values (1, 1), (1, 2);
+
+insert into profiles (user_id, hobby)
+values
+(1, 'programming');
 
 create table categories (
     id                      bigserial primary key,
