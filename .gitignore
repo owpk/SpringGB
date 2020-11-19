@@ -10,7 +10,9 @@ HELP.md
 .settings
 .springBeans
 .sts4-cache
-
+product-service/target/
+dto-commons/target/
+eureka-service/target/
 ### IntelliJ IDEA ###
 .idea
 *.iws
