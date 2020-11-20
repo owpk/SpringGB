@@ -8,6 +8,8 @@
         <module>dto-commons</module>
         <module>product-service</module>
         <module>eureka-service</module>
+        <module>order-service</module>
+        <module>market-entities</module>
     </modules>
 
     <parent>

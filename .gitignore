@@ -13,6 +13,7 @@ HELP.md
 product-service/target/
 dto-commons/target/
 eureka-service/target/
+order-service/target/
 ### IntelliJ IDEA ###
 .idea
 *.iws

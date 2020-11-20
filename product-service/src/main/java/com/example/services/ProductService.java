@@ -1,6 +1,5 @@
 package com.example.services;
 
-import com.example.dto.ProductDto;
 import com.example.entities.Product;
 import com.example.repositories.ProductRepo;
 import lombok.RequiredArgsConstructor;
