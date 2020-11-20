@@ -33,8 +33,9 @@ create table order_items (
     quantity                int
 );
 
-
-
+insert into users (username, password, email)
+values
+('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com');
 
 insert into categories (title)
 values

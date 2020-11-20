@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
+    private final Cart fakeCart;
 
     @GetMapping
     public List<OrderDto> getAllOrders() {
@@ -27,8 +28,8 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createNewOrderTest(@RequestParam String address) {
         User fakeUser = new User();
-        fakeUser.setUsername("user");
-        Cart fakeCart = new CartImpl();
+        fakeUser.setId(1L);
+
         fakeCart.addOrIncrement(1L);
         fakeCart.addOrIncrement(2L);
         Order order = new Order(fakeUser, fakeCart, address);

@@ -16,9 +16,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Getter
 @Component
-@EnableEurekaClient
+@Getter
 @EnableCircuitBreaker
 public class CartImpl implements Cart {
     private RestTemplate restTemplate;
@@ -43,7 +42,7 @@ public class CartImpl implements Cart {
                 return;
             }
         }
-        Product p = restTemplate.getForObject("http://product-service/" + productId, Product.class);
+        Product p = restTemplate.getForObject("http://product-service/market/api/v1/product/" + productId, Product.class);
         items.add(new OrderItem(p));
         recalculate();
     }
