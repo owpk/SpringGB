@@ -1,0 +1,25 @@
+<div>
+    <h3>Заказ</h3>
+<div class="container">
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Date</td>
+            <td>Name</td>
+            <td>Product List</td>
+            <td>Address</td>
+            <td>Total price</td>
+        </tr>
+        <tbody>
+
+        <tr ng-repeat="o in order">
+            <td>{{o.timestamp}}</td>
+            <td>{{o.username}}</td>
+            <td>{{o.orderItemDtoList}}</td>
+            <td>{{o.address}}</td>
+            <td>{{o.price}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-outline-warning" ng-click="confirmOrder()">place an order</a>
+</div>
+</div>
