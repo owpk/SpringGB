@@ -22,7 +22,6 @@ public class BaseConsumer {
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
-            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
         };
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
         });
